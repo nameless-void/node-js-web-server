@@ -1,14 +1,14 @@
-const http = require('http')
+const http = require('http');
 
-const PORT = 4000
+const PORT = 4000;
 
 const responseDataJSON = () => {
     const data = [{
         nodeJS: '20.5',
-    }]
+    }];
 
-    return JSON.stringify(data)
-}
+    return JSON.stringify(data);
+};
 
 const server = http.createServer((req, res) => {
     console.log('Server accept request');
@@ -17,7 +17,7 @@ const server = http.createServer((req, res) => {
     res.setHeader('Content-Type', 'text/html');
 
     if(req.url == '/'){
-        res.end(responseDataJSON())
+        res.end(responseDataJSON());
     }
     
     res.end();
