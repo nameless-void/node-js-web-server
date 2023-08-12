@@ -35,8 +35,8 @@ http.createServer((req, res) => {
         }
         res.write(data);
         res.end();
-    })
+    });
 
 }).listen(PORT, () => {
     console.log(`Server started on port: ${PORT}. Process ID: ${pid}`);
-})
+});
