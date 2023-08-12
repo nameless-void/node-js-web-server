@@ -1,0 +1,15 @@
+{
+  "name": "s-webserver",
+  "version": "1.0.0",
+  "description": "http-server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "autocannon": "^7.12.0",
+    "nodemon": "^3.0.1"
+  }
+}

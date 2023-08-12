@@ -1,29 +1,35 @@
 const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const pid = process.pid;
 
 const PORT = 4000;
 
-const responseDataJSON = () => {
-    const data = [{
-        nodeJS: '20.5',
-    }];
-
-    return JSON.stringify(data);
-};
-
-const server = http.createServer((req, res) => {
-    console.log('Server accept request');
-    console.log(req.url, req.method);
+http.createServer((req, res) => {
+    console.log('Server is running...');
 
     res.setHeader('Content-Type', 'text/html');
 
-    if(req.url == '/'){
-        res.end(responseDataJSON());
+    const createPath = (page) => path.resolve(__dirname, 'views', `${page}.html`);
+
+    switch(req.url) {
+        case '/':
+            basePath = createPath('index');
+            break;
+        default:
+            basePath = createPath('404');
+            break;
     }
-    
-    res.end();
-});
 
+    fs.readFile(basePath, (err, data) => {
+        if (err){
+            console.log(err);
+            res.end();
+        }
+        res.write(data);
+        res.end();
+    })
 
-server.listen(PORT, 'localhost', (error) => {
-    error ? console.log(error) : console.log(`Server listen port ${PORT}...`);
-});
+}).listen(PORT, () => {
+    console.log(`Server started on port: ${PORT}. Process ID: ${pid}`);
+})
