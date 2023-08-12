@@ -16,14 +16,21 @@ http.createServer((req, res) => {
         case '/':
             basePath = createPath('index');
             break;
+        case '/home':
+            res.setHeader('Location', '/');
+            res.statusCode = 301;
+            res.end();
+            break;
         default:
             basePath = createPath('404');
+            res.statusCode = 404;
             break;
     }
 
     fs.readFile(basePath, (err, data) => {
         if (err){
             console.log(err);
+            res.statusCode = 500;
             res.end();
         }
         res.write(data);
